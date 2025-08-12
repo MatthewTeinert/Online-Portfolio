@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matthew Teinert - Finance Professional</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #1F4E78;
+            --secondary-blue: #2E5A8A;
+            --accent-blue: #3498db;
+            --light-blue: #E8F4F8;
+            --success-green: #27ae60;
+            --warning-orange: #f39c12;
+            --danger-red: #e74c3c;
+            --text-dark: #2c3e50;
+            --text-light: #6c757d;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+            --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.12);
+            --shadow-heavy: 0 15px 35px rgba(0, 0, 0, 0.15);
+            --border-radius: 12px;
+            --border-radius-lg: 20px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--bg-light) 0%, #e9ecef 100%);
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--white);
+            min-height: 100vh;
+            box-shadow: var(--shadow-medium);
+            position: relative;
+        }
+
+        /* Enhanced Header with Glassmorphism */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="40%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="10" cy="10" r="1" fill="url(%23a)"/><circle cx="30" cy="5" r="2" fill="url(%23a)"/><circle cx="60" cy="15" r="1" fill="url(%23a)"/><circle cx="80" cy="8" r="3" fill="url(%23a)"/></svg>') repeat;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: var(--white);
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            letter-spacing: -0.02em;
+        }
+
+        .header p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        /* Enhanced Navigation */
+        .nav {
+            background: var(--white);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-light);
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        .nav button {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            padding: 1.2rem 2rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            font-family: inherit;
+        }
+
+        .nav button::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--primary-blue));
+            transition: var(--transition);
+            transform: translateX(-50%);
+            border-radius: 2px 2px 0 0;
+        }
+
+        .nav button:hover {
+            color: var(--primary-blue);
+            background: var(--light-blue);
+        }
+
+        .nav button.active {
+            color: var(--primary-blue);
+            background: var(--light-blue);
+            font-weight: 600;
+        }
+
+        .nav button.active::before {
+            width: 80%;
+        }
+
+        /* Enhanced Content Layout */
+        .content {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            display: none;
+            animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes slideInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+
+        /* Enhanced Cards */
+        .card {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-light);
+            border: 1px solid #f0f0f0;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--success-green), var(--warning-orange));
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-heavy);
+            border-color: var(--accent-blue);
+        }
+
+        .card h2 {
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Enhanced Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-item {
+            background: linear-gradient(135deg, var(--white), var(--bg-light));
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            border-left: 4px solid var(--accent-blue);
+            transition: var(--transition);
+            box-shadow: var(--shadow-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(52, 152, 219, 0.1) 0%, transparent 70%);
+            transform: scale(0);
+            transition: var(--transition);
+        }
+
+        .skill-item:hover::before {
+            transform: scale(1);
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            border-left-color: var(--success-green);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Experience Cards */
+        .experience-card {
+            background: linear-gradient(135deg, var(--white) 0%, var(--bg-light) 100%);
+            border-radius: var(--border-radius-lg);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid #e9ecef;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--danger-red), var(--warning-orange));
+        }
+
+        .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .experience-card h2 {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .experience-card p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        /* PDF Placeholder Button */
+        .pdf-placeholder {
+            background: linear-gradient(135deg, var(--accent-blue), var(--primary-blue));
+            color: var(--white);
+            padding: 1.5rem 2.5rem;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            font-family: inherit;
+            position: relative;
+            overflow: hidden;
+            min-width: 250px;
+            justify-content: center;
+        }
+
+        .pdf-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: var(--transition);
+        }
+
+        .pdf-placeholder:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(52, 152, 219, 0.4);
+        }
+
+        .pdf-placeholder:hover::before {
+            left: 100%;
+        }
+
+        /* Project Grid */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-item {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border: 1px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .project-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--success-green);
+        }
+
+        .project-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-heavy);
+            border-color: var(--success-green);
+        }
+
+        .project-item h3 {
+            color: var(--text-dark);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .project-item p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .project-button {
+            background: linear-gradient(135deg, var(--success-green), #2ecc71);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            font-family: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: var(--transition);
+        }
+
+        .project-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4);
+        }
+
+        .project-button:hover::before {
+            left: 100%;
+        }
+
+        /* Activity Items */
+        .activity-item {
+            background: linear-gradient(135deg, var(--white), var(--bg-light));
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--accent-blue);
+            transition: var(--transition);
+            box-shadow: var(--shadow-light);
+        }
+
+        .activity-item:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .activity-item h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .activity-item .role {
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .activity-item .date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Enhanced Honors List */
+        .honors-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .honors-list li {
+            background: linear-gradient(135deg, var(--white), var(--bg-light));
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--warning-orange);
+            transition: var(--transition);
+            box-shadow: var(--shadow-light);
+        }
+
+        .honors-list li:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .honors-list li strong {
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .honors-list li small {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Enhanced Certification Badges */
+        .cert-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--success-green), #2ecc71);
+            color: var(--white);
+            padding: 1rem 1.8rem;
+            border-radius: 50px;
+            margin: 0.5rem;
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            font-size: 0.9rem;
+        }
+
+        .cert-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: var(--transition);
+        }
+
+        .cert-badge:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4);
+        }
+
+        .cert-badge:hover::before {
+            left: 100%;
+        }
+
+        /* Enhanced Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--light-blue), var(--bg-light));
+            border-radius: var(--border-radius-lg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e9ecef;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(31, 78, 120, 0.9), rgba(52, 152, 219, 0.9));
+            opacity: 0;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05) rotate(1deg);
+        }
+
+        .gallery-placeholder {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .gallery-item h4 {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        /* Contact Form Styles */
+        .contact-form {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-medium);
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: var(--white);
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            font-family: inherit;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(31, 78, 120, 0.4);
+        }
+
+        /* Enhanced Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--bg-light) 0%, #e9ecef 100%);
+            padding: 4rem 0;
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer h2 {
+            text-align: center;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-size: 2.2rem;
+            font-weight: 600;
+        }
+
+        .footer p {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .linkedin-card {
+            background: linear-gradient(135deg, #0077b5, #0066a0);
+            color: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            text-decoration: none;
+            display: block;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .linkedin-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            transform: scale(0);
+            transition: var(--transition);
+        }
+
+        .linkedin-card:hover::before {
+            transform: scale(1);
+        }
+
+        .linkedin-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 119, 181, 0.4);
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .linkedin-card h3 {
+            font-size: 1.3rem;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        /* Profile Photo Enhancement */
+        .profile-photo {
+            width: 220px;
+            height: 220px;
+            border-radius: var(--border-radius-lg);
+            background: linear-gradient(135deg, var(--light-blue), var(--bg-light));
+            border: 4px solid var(--primary-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .photo-placeholder {
+            width: 60%;
+            height: 60%;
+            background: var(--primary-blue);
+            border-radius: 50%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 3rem 1rem;
+            }
+            
+            .content {
+                padding: 2rem 1rem;
+            }
+            
+            .nav button {
+                padding: 1rem 1.2rem;
+                font-size: 0.85rem;
+            }
+            
+            .card, .experience-card {
+                padding: 1.5rem;
+            }
+            
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-photo {
+                width: 180px;
+                height: 180px;
+            }
+
+            .contact-form {
+                padding: 2rem;
+                margin: 1rem;
+            }
+        }
+
+        /* Performance Optimizations */
+        .section:not(.active) {
+            visibility: hidden;
+            position: absolute;
+            left: -9999px;
+        }
+
+        .section.active {
+            visibility: visible;
+            position: relative;
+            left: auto;
+        }
+
+        /* Accessibility Improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .nav button:focus,
+        .pdf-placeholder:focus,
+        .project-button:focus,
+        .submit-button:focus {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1>Matthew Teinert</h1>
+                <p>Finance Student at UT Austin | Aspiring Investment Banking & Corporate Finance Analyst</p>
+            </div>
+        </header>
+
+        <nav class="nav">
+            <div class="nav-container">
+                <button onclick="showSection('about')" class="nav-btn active">About</button>
+                <button onclick="showSection('experience')" class="nav-btn">Experience</button>
+                <button onclick="showSection('projects')" class="nav-btn">Projects</button>
+                <button onclick="showSection('activities')" class="nav-btn">Activities & Volunteering</button>
+                <button onclick="showSection('honors')" class="nav-btn">Honors & Awards</button>
+                <button onclick="showSection('certifications')" class="nav-btn">Certifications</button>
+                <button onclick="showSection('gallery')" class="nav-btn">Gallery</button>
+            </div>
+        </nav>
+
+        <main class="content">
+            <section id="about" class="section active">
+                <div class="card">
+                    <div style="display: flex; align-items: flex-start; gap: 3rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                        <div style="flex-shrink: 0;">
+                            <div class="profile-photo">
+                                <div class="photo-placeholder"></div>
+                            </div>
+                        </div>
+                        <div style="flex: 1; min-width: 300px;">
+                            <h2 style="margin-top: 0;">About Me</h2>
+                            <p>Hey there, I'm Matthew! I'm currently a junior at the University of Texas at Austin studying Finance with a minor in the Analytics and Business of Sports. I'm originally from Round Rock, Texas, which gave me a great foundation growing up in the heart of Texas before making my way to Austin for college.</p>
+                            
+                            <p>I'm expected to graduate in May 2027 with my Bachelor of Business Administration from the McCombs School of Business. Currently, I maintain a 3.98 GPA and am part of the McCombs Success Scholars program.</p>
+                            
+                            <p>I'm passionate about the intersection of finance and sports, which is why I chose my unique minor. My goal is to break into investment banking or corporate finance, where I can combine my analytical skills with my love for problem-solving.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div style="display: flex; align-items: flex-start; gap: 3rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 300px;">
+                            <h2 style="margin-top: 0;">Personal Interests</h2>
+                            <p>Outside of academics and work, I enjoy playing golf and staying active in Austin's outdoor scene. As a diehard Longhorn fan, I am always supporting UT athletics and enjoy attending as many games as I can. I love traveling and camping with my family and friends, as well as my 16 year old dachshund.</p>
+                            
+                            <p>Additionally, I love sports, especially the NBA and NFL, and I like to think I'm pretty good at trivia. When I'm not studying or working, you can often find me listening to Drake. I'm always interested in new experiences that contribute to both personal growth and professional development.</p>
+                        </div>
+                        <div style="flex-shrink: 0;">
+                            <div class="profile-photo">
+                                <div class="photo-placeholder"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Education</h2>
+                    <h3>The University of Texas at Austin</h3>
+                    <p><strong>Bachelor of Business Administration - BBA, Finance</strong><br>
+                    Aug 2023 - May 2027<br>
+                    McCombs Success Scholar (MSS)<br>
+                    Overall GPA: 3.98</p>
+                    
+                    <p><strong>Minor, Business Administration - Analytics and Business of Sports</strong><br>
+                    Aug 2025 - May 2027</p>
+                </div>
+
+                <div class="card">
+                    <h2>Technical Skills</h2>
+                    <div class="skills-grid" style="grid-template-columns: repeat(3, 1fr);">
+                        <div class="skill-item">
+                            <div style="width: 40px; height: 40px; background: #107c41; border-radius: 8px; margin: 0 auto 1rem auto; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">XL</div>
+                            <strong>Microsoft Excel</strong><br>
+                            <small>Financial Modeling & Analysis</small>
+                        </div>
+                        <div class="skill-item">
+                            <div style="width: 40px; height: 40px; background: #d24726; border-radius: 8px; margin: 0 auto 1rem auto; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">PP</div>
+                            <strong>Microsoft PowerPoint</strong><br>
+                            <small>Professional Presentations</small>
+                        </div>
+                        <div class="skill-item">
+                            <div style="width: 40px; height: 40px; background: #2b579a; border-radius: 8px; margin: 0 auto 1rem auto; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">W</div>
+                            <strong>Microsoft Word</strong><br>
+                            <small>Business Documentation</small>
+                        </div>
+                        <div class="skill-item">
+                            <div style="width: 40px; height: 40px; background: #1f77b4; border-radius: 8px; margin: 0 auto 1rem auto; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">T</div>
+                            <strong>Tableau</strong><br>
+                            <small>Interactive Data Visualization</small>
+                        </div>
+                        <div class="skill-item">
+                            <div style="width: 40px; height: 40px; background: #276dc3; border-radius: 8px; margin: 0 auto 1rem auto; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">R</div>
+                            <strong>R Programming</strong><br>
+                            <small>Statistical Computing</small>
+                        </div>
+                        <div class="skill-item">
+                            <div style="width: 40px; height: 40px; background: linear-gradient(45deg, #00d4ff, #9c40ff); border-radius: 8px; margin: 0 auto 1rem auto; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">C</div>
+                            <strong>Canva Design</strong><br>
+                            <small>Creative Content Design</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="experience" class="section">
+                <div class="experience-card">
+                    <h2>University of Texas Athletics</h2>
+                    <p>Finance Senior Student Associate, Business Office</p>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 0.5rem;">May 2024 - Present</p>
+                    <button class="pdf-placeholder" onclick="openExperiencePDF('ut-athletics')">
+                        View Complete Experience Summary
+                    </button>
+                </div>
+
+                <div class="experience-card">
+                    <h2>McCombs School of Business</h2>
+                    <p>Peer Mentor, McCombs Success Scholars</p>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 0.5rem;">August 2024 - Present</p>
+                    <button class="pdf-placeholder" onclick="openExperiencePDF('mccombs-mentor')">
+                        View Complete Experience Summary
+                    </button>
+                </div>
+            </section>
+
+            <section id="projects" class="section">
+                <div class="card">
+                    <h2>Academic & Professional Projects</h2>
+                    <p>A collection of my most significant projects demonstrating analytical skills, financial modeling expertise, and real-world problem-solving capabilities.</p>
+                </div>
+                
+                <div class="experience-card">
+                    <h2>2025-2026 College Football Revenue Sharing Allocation Model</h2>
+                    <p>Comprehensive financial modeling project analyzing the new NCAA revenue sharing framework and its impact on Division 1 football programs. This multi-dashboard analysis includes budget allocation strategies, compliance tracking, and performance metrics visualization.</p>
+                    <button class="pdf-placeholder" onclick="openMainProject('revenue-sharing')">
+                        View Project Summary
+                    </button>
+                </div>
+                
+                <div class="project-grid">
+                    <div class="project-item">
+                        <h3>NCAA Revenue Sharing Dashboard</h3>
+                        <p>Interactive Tableau dashboard showing revenue allocation strategies across different athletic programs and compliance requirements.</p>
+                        <button class="project-button" onclick="openProjectDashboard('ncaa-tableau')">
+                            View Tableau Dashboard
+                        </button>
+                    </div>
+
+                    <div class="project-item">
+                        <h3>Financial Process Automation</h3>
+                        <p>Excel-based automation system that streamlined UT Athletics inventory tracking and financial reconciliation processes.</p>
+                        <button class="project-button" onclick="openProjectReport('automation-report')">
+                            View Project Report
+                        </button>
+                    </div>
+
+                    <div class="project-item">
+                        <h3>Trade Sponsorship Analysis</h3>
+                        <p>Data management and visualization system for tracking and analyzing trade sponsorship transactions across athletic departments.</p>
+                        <button class="project-button" onclick="openProjectDashboard('sponsorship-tableau')">
+                            View Tableau Dashboard
+                        </button>
+                    </div>
+
+                    <div class="project-item">
+                        <h3>Sports Analytics Research</h3>
+                        <p>Comprehensive analysis of collegiate athletic performance metrics and their correlation with financial outcomes.</p>
+                        <button class="project-button" onclick="openProjectReport('analytics-report')">
+                            View Project Report
+                        </button>
+                    </div>
+
+                    <div class="project-item">
+                        <h3>Investment Portfolio Model</h3>
+                        <p>Personal investment analysis and portfolio optimization model using modern portfolio theory and risk assessment techniques.</p>
+                        <button class="project-button" onclick="openProjectDashboard('portfolio-tableau')">
+                            View Tableau Dashboard
+                        </button>
+                    </div>
+
+                    <div class="project-item">
+                        <h3>Budget Forecasting System</h3>
+                        <p>Multi-year budget forecasting model designed for athletic department resource allocation and strategic planning.</p>
+                        <button class="project-button" onclick="openProjectReport('budget-report')">
+                            View Project Report
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="activities" class="section">
+                <div class="card">
+                    <h2>Leadership Experience</h2>
+                    
+                    <div class="activity-item">
+                        <h3>Texas Young Life</h3>
+                        <div class="role">Member</div>
+                        <div class="date">August 2023 - Present</div>
+                        <p>Participate in weekly small group sessions focused on Biblical scripture analysis and discussions about faith, identity, and life purpose.</p>
+                    </div>
+
+                    <div class="activity-item">
+                        <h3>University Finance Association</h3>
+                        <div class="role">Analyst Team Member</div>
+                        <div class="date">August 2023 - May 2024</div>
+                        <p>Attended professional development sessions with industry leaders and completed comprehensive finance curriculum covering accounting, valuation, and financial modeling.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Volunteer Experience</h2>
+                    <div class="activity-item">
+                        <h3>Zion Lutheran Church and School</h3>
+                        <div class="role">Volunteer</div>
+                        <div class="date">October 2023 - March 2024 | Georgetown, Texas</div>
+                        <p>Delivered speeches at donor receptions and assisted with major fundraising events supporting the church and school community.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="honors" class="section">
+                <div class="card">
+                    <h2>Honors & Awards</h2>
+                    <ul class="honors-list">
+                        <li>
+                            <strong>Raj Charitable Foundation, Inc. Endowed President's Scholarship</strong><br>
+                            <small>Fall 2023 - Fall 2025</small><br><br>
+                            Awarded through the McCombs Scholars Program for academic merit, leadership, and extracurricular involvement while maintaining full-time enrollment and a strong GPA.
+                        </li>
+                        <li>
+                            <strong>University Honors</strong><br>
+                            <small>Fall 2023 - Spring 2025</small><br><br>
+                            Recognized each semester for completing a full course load with a GPA of 3.50+ and no incomplete grades, placing among the top undergraduate students in the college.
+                        </li>
+                        <li>
+                            <strong>Valedictorian - Jarrell High School</strong><br>
+                            <small>August 2022 - May 2023</small><br><br>
+                            Graduated as top student in class with highest academic achievement, delivering the valedictory address to peers, faculty, and families.
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="certifications" class="section">
+                <div class="card">
+                    <h2>Professional Certifications</h2>
+                    <div style="margin: 2rem 0;">
+                        <span class="cert-badge" onclick="openCertificate('bloomberg-cert')">Bloomberg Finance Fundamentals (2025)</span>
+                        <span class="cert-badge" onclick="openCertificate('tableau-cert')">Tableau 2024.1: Essential Training (2024)</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Professional Programs</h2>
+                    <div style="margin: 2rem 0;">
+                        <span class="cert-badge" onclick="openCertificate('goldman-program')">Goldman Sachs Virtual Insight Series (2025)</span>
+                    </div>
+                    <p style="margin-top: 1rem;">Participated in exclusive virtual program providing insights into investment banking, financial markets, and career development in finance.</p>
+                </div>
+            </section>
+
+            <section id="gallery" class="section">
+                <div class="card">
+                    <h2>Photo Gallery</h2>
+                </div>
+                
+                <div class="gallery-grid">
+                    <div class="gallery-item" title="Golf Adventures">
+                        <div class="gallery-placeholder"></div>
+                        <h4>Golf Adventures</h4>
+                    </div>
+                    <div class="gallery-item" title="Texas Longhorns Spirit">
+                        <div class="gallery-placeholder"></div>
+                        <h4>Longhorn Pride</h4>
+                    </div>
+                    <div class="gallery-item" title="Austin City Exploration">
+                        <div class="gallery-placeholder"></div>
+                        <h4>Austin Life</h4>
+                    </div>
+                    <div class="gallery-item" title="Travel Memories">
+                        <div class="gallery-placeholder"></div>
+                        <h4>Travel Adventures</h4>
+                    </div>
+                    <div class="gallery-item" title="Camping Experiences">
+                        <div class="gallery-placeholder"></div>
+                        <h4>Outdoor Adventures</h4>
+                    </div>
+                    <div class="gallery-item" title="Dachshund Moments">
+                        <div class="gallery-placeholder"></div>
+                        <h4>Dachshund Love</h4>
+                    </div>
+                    <div class="gallery-item" title="Basketball Games">
+                        <div class="gallery-placeholder"></div>
+                        <h4>NBA Passion</h4>
+                    </div>
+                    <div class="gallery-item" title="Music Events">
+                        <div class="gallery-placeholder"></div>
+                        <h4>Music Moments</h4>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <h2>Let's Connect</h2>
+                <p>I'd love to hear from you! Feel free to reach out through the contact form below or connect with me on LinkedIn.</p>
+                
+                <div class="contact-form">
+                    <form onsubmit="handleContactSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" required placeholder="Tell me about yourself and what you'd like to discuss..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">Send Message</button>
+                    </form>
+                </div>
+
+                <div style="margin-top: 3rem; display: flex; justify-content: center;">
+                    <a href="https://linkedin.com/in/matthewteinert" target="_blank" rel="noopener noreferrer" class="linkedin-card">
+                        <h3>Connect on LinkedIn</h3>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Enhanced section switching with performance optimization
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const targetSection = document.getElementById(sectionId);
+            const clickedButton = event ? event.target : document.querySelector(`[onclick*="'${sectionId}'"]`);
+            
+            // Early return if section is already active
+            if (targetSection.classList.contains('active')) return;
+            
+            // Remove active states
+            sections.forEach(section => section.classList.remove('active'));
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active states
+            targetSection.classList.add('active');
+            if (clickedButton) clickedButton.classList.add('active');
+            
+            // Scroll to top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Update URL without page reload for better UX
+            if (history.replaceState) {
+                history.replaceState(null, null, `#${sectionId}`);
+            }
+        }
+
+        // Experience PDF functions
+        function openExperiencePDF(experienceType) {
+            const messages = {
+                'ut-athletics': 'UT Athletics Experience Summary PDF would open here',
+                'mccombs-mentor': 'McCombs Mentorship Experience Summary PDF would open here'
+            };
+            
+            // Show loading state
+            if (event.target) {
+                event.target.style.opacity = '0.7';
+                event.target.innerHTML = 'Loading Experience Summary...';
+                
+                setTimeout(() => {
+                    alert(messages[experienceType] || 'Experience PDF would open here');
+                    // Reset button
+                    event.target.style.opacity = '1';
+                    event.target.innerHTML = 'View Complete Experience Summary';
+                }, 1000);
+            }
+        }
+
+        // Main Project function (for the featured project)
+        function openMainProject(projectType) {
+            const messages = {
+                'revenue-sharing': '2025-2026 College Football Revenue Sharing Allocation Model - Project Summary would open here'
+            };
+            
+            // Show loading state
+            if (event.target) {
+                event.target.style.opacity = '0.7';
+                event.target.innerHTML = 'Loading Project Summary...';
+                
+                setTimeout(() => {
+                    alert(messages[projectType] || 'Project Summary would open here');
+                    // Reset button
+                    event.target.style.opacity = '1';
+                    event.target.innerHTML = 'View Project Summary';
+                }, 1000);
+            }
+        }
+
+        function openProjectDashboard(dashboardType) {
+            const messages = {
+                'ncaa-tableau': 'NCAA Revenue Sharing Tableau Dashboard would open here',
+                'sponsorship-tableau': 'Trade Sponsorship Analysis Tableau Dashboard would open here',
+                'portfolio-tableau': 'Investment Portfolio Tableau Dashboard would open here'
+            };
+            
+            // Show loading state
+            if (event.target) {
+                event.target.style.opacity = '0.7';
+                event.target.innerHTML = 'Loading Dashboard...';
+                
+                setTimeout(() => {
+                    alert(messages[dashboardType] || 'Tableau Dashboard would open here');
+                    // Reset button
+                    event.target.style.opacity = '1';
+                    event.target.innerHTML = 'View Tableau Dashboard';
+                }, 1000);
+            }
+        }
+
+        function openProjectReport(reportType) {
+            const messages = {
+                'automation-report': 'Financial Process Automation Project Report PDF would open here',
+                'analytics-report': 'Sports Analytics Research Report PDF would open here',
+                'budget-report': 'Budget Forecasting System Report PDF would open here'
+            };
+            
+            // Show loading state
+            if (event.target) {
+                event.target.style.opacity = '0.7';
+                event.target.innerHTML = 'Loading Report...';
+                
+                setTimeout(() => {
+                    alert(messages[reportType] || 'Project Report PDF would open here');
+                    // Reset button
+                    event.target.style.opacity = '1';
+                    event.target.innerHTML = 'View Project Report';
+                }, 1000);
+            }
+        }
+
+        // Certificate function
+        function openCertificate(certType) {
+            const certificates = {
+                'bloomberg-cert': 'https://portal.bloombergforeducation.com/certificates/ceCxkEmBog7ohbFkPj3ZJ8w7',
+                'tableau-cert': 'https://www.linkedin.com/learning/certificates/0bdd1c5a10f5e2648f2c0d658acfebc8b024e3521511a8427948894a767753f6?u=36306084',
+                'goldman-program': '#'
+            };
+            
+            if (certificates[certType] && certificates[certType] !== '#') {
+                window.open(certificates[certType], '_blank', 'noopener,noreferrer');
+            } else {
+                alert('Goldman Sachs Virtual Insight Series Certificate PDF would open here');
+            }
+        }
+
+        // Contact form handler
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            // Show loading state
+            const submitButton = form.querySelector('.submit-button');
+            const originalText = submitButton.innerHTML;
+            submitButton.innerHTML = 'Sending Message...';
+            submitButton.disabled = true;
+            
+            // Construct mailto URL
+            const subject = encodeURIComponent(`Portfolio Contact: ${data.subject}`);
+            const body = encodeURIComponent(`Name: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`);
+            const mailtoURL = `mailto:matthew.teinert@yahoo.com?subject=${subject}&body=${body}`;
+            
+            // Open default email client
+            window.location.href = mailtoURL;
+            
+            // Reset form after brief delay
+            setTimeout(() => {
+                alert(`Thank you ${data.name}! Your default email client should have opened with a pre-filled message to matthew.teinert@yahoo.com. Please send the email to complete your message.`);
+                form.reset();
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+            }, 1000);
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle URL hash on page load
+            const hash = window.location.hash.slice(1);
+            if (hash && document.getElementById(hash)) {
+                showSection(hash);
+                // Update nav button
+                document.querySelector(`[onclick*="'${hash}'"]`)?.classList.add('active');
+                document.querySelector('.nav-btn.active:not([onclick*="' + hash + '"])')?.classList.remove('active');
+            }
+            
+            // Intersection Observer for performance
+            const observerOptions = {
+                root: null,
+                rootMargin: '50px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe cards for animations
+            const animatedElements = document.querySelectorAll('.card, .experience-card, .project-item, .activity-item');
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                observer.observe(el);
+            });
+
+            // Add keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    // Return to about section
+                    showSection('about');
+                }
+            });
+
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    if (this.getAttribute('href').startsWith('#') && this.getAttribute('href').length > 1) {
+                        e.preventDefault();
+                        const target = this.getAttribute('href').slice(1);
+                        if (document.getElementById(target)) {
+                            showSection(target);
+                        }
+                    }
+                });
+            });
+
+            // Performance: Lazy load gallery items
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            galleryItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.willChange = 'transform';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.willChange = 'auto';
+                });
+            });
+
+            // Add focus management for accessibility
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach((button, index) => {
+                button.addEventListener('keydown', function(e) {
+                    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        const nextButton = navButtons[(index + 1) % navButtons.length];
+                        nextButton.focus();
+                    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        const prevButton = navButtons[(index - 1 + navButtons.length) % navButtons.length];
+                        prevButton.focus();
+                    }
+                });
+            });
+        });
+
+        // Enhanced gallery interaction
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const title = this.getAttribute('title');
+                console.log(`Clicked on ${title}`);
+                // Future: Could implement a modal or lightbox here
+            });
+        });
+
+        // Add preload for critical resources
+        const preloadFont = document.createElement('link');
+        preloadFont.rel = 'preload';
+        preloadFont.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap';
+        preloadFont.as = 'style';
+        document.head.appendChild(preloadFont);
+    </script>
+</body>
+</html>
+               
