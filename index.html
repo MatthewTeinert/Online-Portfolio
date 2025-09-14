@@ -324,8 +324,8 @@
             margin-bottom: 2rem;
         }
 
-        /* PDF Placeholder Button */
-        .pdf-placeholder {
+        /* Enhanced PDF Button */
+        .pdf-button {
             background: linear-gradient(135deg, var(--accent-blue), var(--primary-blue));
             color: var(--white);
             padding: 1.5rem 2.5rem;
@@ -346,7 +346,12 @@
             justify-content: center;
         }
 
-        .pdf-placeholder::before {
+        .pdf-button::before {
+            content: '📄';
+            font-size: 1.2rem;
+        }
+
+        .pdf-button::after {
             content: '';
             position: absolute;
             top: 0;
@@ -357,13 +362,28 @@
             transition: var(--transition);
         }
 
-        .pdf-placeholder:hover {
+        .pdf-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(52, 152, 219, 0.4);
         }
 
-        .pdf-placeholder:hover::before {
+        .pdf-button:hover::after {
             left: 100%;
+        }
+
+        .pdf-button.loading {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .pdf-button.loading::before {
+            content: '⏳';
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         /* Project Grid */
@@ -531,6 +551,8 @@
             position: relative;
             overflow: hidden;
             font-size: 0.9rem;
+            border: none;
+            font-family: inherit;
         }
 
         .cert-badge::before {
@@ -566,7 +588,6 @@
             background: linear-gradient(135deg, var(--light-blue), var(--bg-light));
             border-radius: var(--border-radius-lg);
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             transition: var(--transition);
@@ -574,8 +595,6 @@
             position: relative;
             overflow: hidden;
             border: 1px solid #e9ecef;
-            text-align: center;
-            padding: 1rem;
         }
 
         .gallery-item::before {
@@ -609,14 +628,6 @@
             height: 80px;
             background: var(--accent-blue);
             border-radius: 50%;
-            margin-bottom: 1rem;
-        }
-
-        .gallery-item h4 {
-            color: var(--text-dark);
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin: 0;
         }
 
         /* Contact Form Styles */
@@ -786,6 +797,66 @@
             border-radius: 50%;
         }
 
+        /* PDF Modal Styles */
+        .pdf-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .pdf-modal-content {
+            position: relative;
+            margin: 2% auto;
+            width: 90%;
+            height: 90%;
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pdf-modal-header {
+            padding: 1rem 2rem;
+            background: var(--primary-blue);
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pdf-close {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .pdf-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .pdf-iframe {
+            flex: 1;
+            border: none;
+            width: 100%;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .header {
@@ -818,6 +889,12 @@
                 padding: 2rem;
                 margin: 1rem;
             }
+
+            .pdf-modal-content {
+                margin: 5% auto;
+                width: 95%;
+                height: 85%;
+            }
         }
 
         /* Performance Optimizations */
@@ -843,9 +920,10 @@
         }
 
         .nav button:focus,
-        .pdf-placeholder:focus,
+        .pdf-button:focus,
         .project-button:focus,
-        .submit-button:focus {
+        .submit-button:focus,
+        .cert-badge:focus {
             outline: 2px solid var(--accent-blue);
             outline-offset: 2px;
         }
@@ -966,8 +1044,8 @@
                     <h2>University of Texas Athletics</h2>
                     <p>Finance Senior Student Associate, Business Office</p>
                     <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 0.5rem;">May 2024 - Present</p>
-                    <button class="pdf-placeholder" onclick="openExperiencePDF('ut-athletics')">
-                        View Complete Experience Summary
+                    <button class="pdf-button" onclick="openPDF('experience', 'ut-athletics-experience.pdf', 'UT Athletics Experience Summary')">
+                        View Experience Summary
                     </button>
                 </div>
 
@@ -975,8 +1053,8 @@
                     <h2>McCombs School of Business</h2>
                     <p>Peer Mentor, McCombs Success Scholars</p>
                     <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 0.5rem;">August 2024 - Present</p>
-                    <button class="pdf-placeholder" onclick="openExperiencePDF('mccombs-mentor')">
-                        View Complete Experience Summary
+                    <button class="pdf-button" onclick="openPDF('experience', 'mccombs-mentor-experience.pdf', 'McCombs Mentorship Experience Summary')">
+                        View Experience Summary
                     </button>
                 </div>
             </section>
@@ -990,7 +1068,7 @@
                 <div class="experience-card">
                     <h2>2025-2026 College Football Revenue Sharing Allocation Model</h2>
                     <p>Comprehensive financial modeling project analyzing the new NCAA revenue sharing framework and its impact on Division 1 football programs. This multi-dashboard analysis includes budget allocation strategies, compliance tracking, and performance metrics visualization.</p>
-                    <button class="pdf-placeholder" onclick="openMainProject('revenue-sharing')">
+                    <button class="pdf-button" onclick="openPDF('project', 'revenue-sharing-model.pdf', '2025-2026 Revenue Sharing Model')">
                         View Project Summary
                     </button>
                 </div>
@@ -999,7 +1077,7 @@
                     <div class="project-item">
                         <h3>NCAA Revenue Sharing Dashboard</h3>
                         <p>Interactive Tableau dashboard showing revenue allocation strategies across different athletic programs and compliance requirements.</p>
-                        <button class="project-button" onclick="openProjectDashboard('ncaa-tableau')">
+                        <button class="project-button" onclick="openPDF('dashboard', 'ncaa-tableau-dashboard.pdf', 'NCAA Revenue Sharing Dashboard')">
                             View Tableau Dashboard
                         </button>
                     </div>
@@ -1007,7 +1085,7 @@
                     <div class="project-item">
                         <h3>Financial Process Automation</h3>
                         <p>Excel-based automation system that streamlined UT Athletics inventory tracking and financial reconciliation processes.</p>
-                        <button class="project-button" onclick="openProjectReport('automation-report')">
+                        <button class="project-button" onclick="openPDF('project', 'automation-report.pdf', 'Financial Process Automation Report')">
                             View Project Report
                         </button>
                     </div>
@@ -1015,7 +1093,7 @@
                     <div class="project-item">
                         <h3>Trade Sponsorship Analysis</h3>
                         <p>Data management and visualization system for tracking and analyzing trade sponsorship transactions across athletic departments.</p>
-                        <button class="project-button" onclick="openProjectDashboard('sponsorship-tableau')">
+                        <button class="project-button" onclick="openPDF('dashboard', 'sponsorship-tableau.pdf', 'Trade Sponsorship Analysis Dashboard')">
                             View Tableau Dashboard
                         </button>
                     </div>
@@ -1023,7 +1101,7 @@
                     <div class="project-item">
                         <h3>Sports Analytics Research</h3>
                         <p>Comprehensive analysis of collegiate athletic performance metrics and their correlation with financial outcomes.</p>
-                        <button class="project-button" onclick="openProjectReport('analytics-report')">
+                        <button class="project-button" onclick="openPDF('project', 'analytics-research.pdf', 'Sports Analytics Research Report')">
                             View Project Report
                         </button>
                     </div>
@@ -1031,7 +1109,7 @@
                     <div class="project-item">
                         <h3>Investment Portfolio Model</h3>
                         <p>Personal investment analysis and portfolio optimization model using modern portfolio theory and risk assessment techniques.</p>
-                        <button class="project-button" onclick="openProjectDashboard('portfolio-tableau')">
+                        <button class="project-button" onclick="openPDF('dashboard', 'portfolio-tableau.pdf', 'Investment Portfolio Dashboard')">
                             View Tableau Dashboard
                         </button>
                     </div>
@@ -1039,7 +1117,7 @@
                     <div class="project-item">
                         <h3>Budget Forecasting System</h3>
                         <p>Multi-year budget forecasting model designed for athletic department resource allocation and strategic planning.</p>
-                        <button class="project-button" onclick="openProjectReport('budget-report')">
+                        <button class="project-button" onclick="openPDF('project', 'budget-forecasting.pdf', 'Budget Forecasting System Report')">
                             View Project Report
                         </button>
                     </div>
@@ -1103,15 +1181,21 @@
                 <div class="card">
                     <h2>Professional Certifications</h2>
                     <div style="margin: 2rem 0;">
-                        <span class="cert-badge" onclick="openCertificate('bloomberg-cert')">Bloomberg Finance Fundamentals (2025)</span>
-                        <span class="cert-badge" onclick="openCertificate('tableau-cert')">Tableau 2024.1: Essential Training (2024)</span>
+                        <button class="cert-badge" onclick="openPDF('certificate', 'bloomberg-certificate.pdf', 'Bloomberg Finance Fundamentals Certificate')">
+                            Bloomberg Finance Fundamentals (2025)
+                        </button>
+                        <button class="cert-badge" onclick="openPDF('certificate', 'tableau-certificate.pdf', 'Tableau Essential Training Certificate')">
+                            Tableau 2024.1: Essential Training (2024)
+                        </button>
                     </div>
                 </div>
 
                 <div class="card">
                     <h2>Professional Programs</h2>
                     <div style="margin: 2rem 0;">
-                        <span class="cert-badge" onclick="openCertificate('goldman-program')">Goldman Sachs Virtual Insight Series (2025)</span>
+                        <button class="cert-badge" onclick="openPDF('certificate', 'goldman-program.pdf', 'Goldman Sachs Virtual Insight Series')">
+                            Goldman Sachs Virtual Insight Series (2025)
+                        </button>
                     </div>
                     <p style="margin-top: 1rem;">Participated in exclusive virtual program providing insights into investment banking, financial markets, and career development in finance.</p>
                 </div>
@@ -1123,37 +1207,29 @@
                 </div>
                 
                 <div class="gallery-grid">
-                    <div class="gallery-item" title="Golf Adventures">
+                    <div class="gallery-item" onclick="openPDF('golf-coming-soon', 'Golf Adventures')">
                         <div class="gallery-placeholder"></div>
-                        <h4>Golf Adventures</h4>
                     </div>
-                    <div class="gallery-item" title="Texas Longhorns Spirit">
+                    <div class="gallery-item" onclick="openPDF('longhorn-coming-soon', 'Texas Longhorns Spirit')">
                         <div class="gallery-placeholder"></div>
-                        <h4>Longhorn Pride</h4>
                     </div>
-                    <div class="gallery-item" title="Austin City Exploration">
+                    <div class="gallery-item" onclick="openPDF('austin-coming-soon', 'Austin City Exploration')">
                         <div class="gallery-placeholder"></div>
-                        <h4>Austin Life</h4>
                     </div>
-                    <div class="gallery-item" title="Travel Memories">
+                    <div class="gallery-item" onclick="openPDF('travel-coming-soon', 'Travel Memories')">
                         <div class="gallery-placeholder"></div>
-                        <h4>Travel Adventures</h4>
                     </div>
-                    <div class="gallery-item" title="Camping Experiences">
+                    <div class="gallery-item" onclick="openPDF('outdoor-coming-soon', 'Camping Experiences')">
                         <div class="gallery-placeholder"></div>
-                        <h4>Outdoor Adventures</h4>
                     </div>
-                    <div class="gallery-item" title="Dachshund Moments">
+                    <div class="gallery-item" onclick="openPDF('dachshund-coming-soon', 'Dachshund Moments')">
                         <div class="gallery-placeholder"></div>
-                        <h4>Dachshund Love</h4>
                     </div>
-                    <div class="gallery-item" title="Basketball Games">
+                    <div class="gallery-item" onclick="openPDF('nba-coming-soon', 'Basketball Games')">
                         <div class="gallery-placeholder"></div>
-                        <h4>NBA Passion</h4>
                     </div>
-                    <div class="gallery-item" title="Music Events">
+                    <div class="gallery-item" onclick="openPDF('music-coming-soon', 'Music Events')">
                         <div class="gallery-placeholder"></div>
-                        <h4>Music Moments</h4>
                     </div>
                 </div>
             </section>
@@ -1195,7 +1271,81 @@
         </footer>
     </div>
 
+    <!-- PDF Modal -->
+    <div id="pdfModal" class="pdf-modal">
+        <div class="pdf-modal-content">
+            <div class="pdf-modal-header">
+                <h3 id="pdfModalTitle">Document Viewer</h3>
+                <button class="pdf-close" onclick="closePDF()">&times;</button>
+            </div>
+            <iframe id="pdfIframe" class="pdf-iframe" src=""></iframe>
+        </div>
+    </div>
+
     <script>
+        // Enhanced PDF handling system
+        const PDF_BASE_URL = './pdfs/'; // Base URL for your PDF files
+        
+        function openPDF(category, filename, title) {
+            const button = event.target;
+            const modal = document.getElementById('pdfModal');
+            const iframe = document.getElementById('pdfIframe');
+            const modalTitle = document.getElementById('pdfModalTitle');
+            
+            // Show loading state
+            button.classList.add('loading');
+            const originalText = button.textContent;
+            
+            // Set modal title
+            modalTitle.textContent = title;
+            
+            // Construct PDF path based on category
+            const pdfPath = `${PDF_BASE_URL}${category}/${filename}`;
+            
+            // For demonstration, we'll show a placeholder message
+            // In production, replace this with actual PDF loading
+            setTimeout(() => {
+                button.classList.remove('loading');
+                
+                // Check if PDF exists (in production, you'd handle this properly)
+                if (checkPDFExists(pdfPath)) {
+                    iframe.src = pdfPath;
+                    modal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    // Fallback for demonstration
+                    showPDFNotAvailable(title, category, filename);
+                }
+            }, 1000);
+        }
+        
+        function checkPDFExists(path) {
+            // In production, implement proper PDF existence checking
+            // For now, return false to show the placeholder system
+            return false;
+        }
+        
+        function showPDFNotAvailable(title, category, filename) {
+            const messages = {
+                experience: `${title} PDF will be available soon. This would contain detailed information about roles, responsibilities, achievements, and impact metrics.`,
+                project: `${title} PDF will be available soon. This would include project methodology, results, visualizations, and technical details.`,
+                dashboard: `${title} will be available soon. This would provide interactive data visualizations and analytical insights.`,
+                certificate: `${title} PDF will be available soon. This would display the official certification document.`,
+                photo: `${title} photo collection will be available soon. This would showcase relevant personal and professional moments.`
+            };
+            
+            alert(messages[category] || `${title} will be available soon.`);
+        }
+        
+        function closePDF() {
+            const modal = document.getElementById('pdfModal');
+            const iframe = document.getElementById('pdfIframe');
+            
+            modal.style.display = 'none';
+            iframe.src = '';
+            document.body.style.overflow = 'auto';
+        }
+        
         // Enhanced section switching with performance optimization
         function showSection(sectionId) {
             const sections = document.querySelectorAll('.section');
@@ -1220,104 +1370,6 @@
             // Update URL without page reload for better UX
             if (history.replaceState) {
                 history.replaceState(null, null, `#${sectionId}`);
-            }
-        }
-
-        // Experience PDF functions
-        function openExperiencePDF(experienceType) {
-            const messages = {
-                'ut-athletics': 'UT Athletics Experience Summary PDF would open here',
-                'mccombs-mentor': 'McCombs Mentorship Experience Summary PDF would open here'
-            };
-            
-            // Show loading state
-            if (event.target) {
-                event.target.style.opacity = '0.7';
-                event.target.innerHTML = 'Loading Experience Summary...';
-                
-                setTimeout(() => {
-                    alert(messages[experienceType] || 'Experience PDF would open here');
-                    // Reset button
-                    event.target.style.opacity = '1';
-                    event.target.innerHTML = 'View Complete Experience Summary';
-                }, 1000);
-            }
-        }
-
-        // Main Project function (for the featured project)
-        function openMainProject(projectType) {
-            const messages = {
-                'revenue-sharing': '2025-2026 College Football Revenue Sharing Allocation Model - Project Summary would open here'
-            };
-            
-            // Show loading state
-            if (event.target) {
-                event.target.style.opacity = '0.7';
-                event.target.innerHTML = 'Loading Project Summary...';
-                
-                setTimeout(() => {
-                    alert(messages[projectType] || 'Project Summary would open here');
-                    // Reset button
-                    event.target.style.opacity = '1';
-                    event.target.innerHTML = 'View Project Summary';
-                }, 1000);
-            }
-        }
-
-        function openProjectDashboard(dashboardType) {
-            const messages = {
-                'ncaa-tableau': 'NCAA Revenue Sharing Tableau Dashboard would open here',
-                'sponsorship-tableau': 'Trade Sponsorship Analysis Tableau Dashboard would open here',
-                'portfolio-tableau': 'Investment Portfolio Tableau Dashboard would open here'
-            };
-            
-            // Show loading state
-            if (event.target) {
-                event.target.style.opacity = '0.7';
-                event.target.innerHTML = 'Loading Dashboard...';
-                
-                setTimeout(() => {
-                    alert(messages[dashboardType] || 'Tableau Dashboard would open here');
-                    // Reset button
-                    event.target.style.opacity = '1';
-                    event.target.innerHTML = 'View Tableau Dashboard';
-                }, 1000);
-            }
-        }
-
-        function openProjectReport(reportType) {
-            const messages = {
-                'automation-report': 'Financial Process Automation Project Report PDF would open here',
-                'analytics-report': 'Sports Analytics Research Report PDF would open here',
-                'budget-report': 'Budget Forecasting System Report PDF would open here'
-            };
-            
-            // Show loading state
-            if (event.target) {
-                event.target.style.opacity = '0.7';
-                event.target.innerHTML = 'Loading Report...';
-                
-                setTimeout(() => {
-                    alert(messages[reportType] || 'Project Report PDF would open here');
-                    // Reset button
-                    event.target.style.opacity = '1';
-                    event.target.innerHTML = 'View Project Report';
-                }, 1000);
-            }
-        }
-
-        // Certificate function
-        function openCertificate(certType) {
-            const certificates = {
-                'bloomberg-cert': 'https://portal.bloombergforeducation.com/certificates/ceCxkEmBog7ohbFkPj3ZJ8w7',
-                'tableau-cert': 'https://www.linkedin.com/learning/certificates/0bdd1c5a10f5e2648f2c0d658acfebc8b024e3521511a8427948894a767753f6?u=36306084',
-                'goldman-program': '#'
-            };
-            
-            if (certificates[certType] && certificates[certType] !== '#') {
-                window.open(certificates[certType], '_blank', 'noopener,noreferrer');
-            } else {
-                alert('Goldman Sachs Virtual Insight Series Certificate PDF would open here');
             }
         }
 
@@ -1363,6 +1415,27 @@
                 document.querySelector('.nav-btn.active:not([onclick*="' + hash + '"])')?.classList.remove('active');
             }
             
+            // Close PDF modal when clicking outside
+            const modal = document.getElementById('pdfModal');
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closePDF();
+                }
+            });
+            
+            // Close PDF modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const modal = document.getElementById('pdfModal');
+                    if (modal.style.display === 'block') {
+                        closePDF();
+                    } else {
+                        // Return to about section
+                        showSection('about');
+                    }
+                }
+            });
+            
             // Intersection Observer for performance
             const observerOptions = {
                 root: null,
@@ -1386,14 +1459,6 @@
                 el.style.transform = 'translateY(30px)';
                 el.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
                 observer.observe(el);
-            });
-
-            // Add keyboard navigation
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    // Return to about section
-                    showSection('about');
-                }
             });
 
             // Add smooth scrolling for anchor links
@@ -1438,15 +1503,6 @@
             });
         });
 
-        // Enhanced gallery interaction
-        document.querySelectorAll('.gallery-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const title = this.getAttribute('title');
-                console.log(`Clicked on ${title}`);
-                // Future: Could implement a modal or lightbox here
-            });
-        });
-
         // Add preload for critical resources
         const preloadFont = document.createElement('link');
         preloadFont.rel = 'preload';
@@ -1456,25 +1512,3 @@
     </script>
 </body>
 </html>
-
-               
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
