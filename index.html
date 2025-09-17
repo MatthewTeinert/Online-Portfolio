@@ -1073,96 +1073,78 @@
                     </button>
                 </div>
                 
-                <div class="project-grid">
-    <div class="project-grid">
-
-    <!-- Conference Dashboard -->
+                <!-- Keep your existing project-item divs exactly as you have them -->
+<div class="project-grid">
     <div class="project-item">
         <h3>Conference Dashboard</h3>
         <p>Interactive Tableau dashboard showing projected revenue allocations across conferences and illustrating settlement-driven funding flows.</p>
+
+        <!-- Your existing embedded Tableau Dashboard -->
         <div class='tableauPlaceholder' id='vizConference' style='position: relative; width: 100%; height: 800px;'>
             <noscript>
                 <a href='#'>
-                    <img alt='Conference Dashboard' 
-                         src='https://public.tableau.com/static/images/20/2025-2026NCAADivision1CollegeFootballRevenueSharingAllocationModel/ConferenceDashboard/1_rss.png' 
-                         style='border: none;' />
+                    <img alt='Conference Dashboard ' src='https://public.tableau.com/static/images/20/2025-2026NCAADivision1CollegeFootballRevenueSharingAllocationModel/ConferenceDashboard/1_rss.png' style='border: none;' />
                 </a>
             </noscript>
+            <object class='tableauViz' style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value=''/>
+                <param name='name' value='2025-2026NCAADivision1CollegeFootballRevenueSharingAllocationModel/ConferenceDashboard'/>
+                <param name='tabs' value='no'/>
+                <param name='toolbar' value='yes'/>
+                <param name='static_image' value='https://public.tableau.com/static/images/20/2025-2026NCAADivision1CollegeFootballRevenueSharingAllocationModel/ConferenceDashboard/1.png' />
+                <param name='animate_transition' value='yes'/>
+                <param name='display_static_image' value='yes'/>
+                <param name='display_spinner' value='yes'/>
+                <param name='display_overlay' value='yes'/>
+                <param name='display_count' value='yes'/>
+                <param name='language' value='en-US'/>
+            </object>
         </div>
     </div>
 
-    <!-- Team Dashboard -->
-    <div class="project-item">
-        <h3>Team Dashboard</h3>
-        <p>Interactive Tableau dashboard projecting revenue allocations across individual teams, illustrating how settlement-driven distributions impact program budgets and resource planning.</p>
-        <div class='tableauPlaceholder' id='vizTeam' style='position: relative; width: 100%; height: 820px;'>
-            <noscript>
-                <a href='#'>
-                    <img alt='Team Dashboard' 
-                         src='https://public.tableau.com/static/images/20/2025-2026NCAADivision1CollegeFootballRevenueSharingAllocationModel/TeamDashboard/1_rss.png' 
-                         style='border: none;' />
-                </a>
-            </noscript>
-        </div>
-    </div>
-
-    <!-- Player Dashboard -->
-    <div class="project-item">
-        <h3>Player Dashboard</h3>
-        <p>Interactive Tableau dashboard projecting revenue allocations at the player level, illustrating how settlement-driven distributions affect individual athletes and roster-level budgets.</p>
-        <div class='tableauPlaceholder' id='vizPlayer' style='position: relative; width: 100%; height: 820px;'>
-            <noscript>
-                <a href='#'>
-                    <img alt='Player Dashboard' 
-                         src='https://public.tableau.com/static/images/20/2025-2026NCAADivision1CollegeFootballRevenueSharingAllocationModel/PlayerDashboard/1_rss.png' 
-                         style='border: none;' />
-                </a>
-            </noscript>
-        </div>
-    </div>
+    <!-- Repeat your Team Dashboard and Player Dashboard divs exactly as before -->
+    <!-- ... -->
 
 </div>
 
-<!-- Unified Tableau JS API Script for Cascading Filters -->
+<!-- NEW: JS for cascading filters -->
 <script type="text/javascript" src="https://public.tableau.com/javascripts/api/viz_v1.js"></script>
 <script type="text/javascript">
-    var options = {
-        hideTabs: true,
-        width: '100%',
-        height: '820px'
+    function getVizObject(id) {
+        var container = document.getElementById(id);
+        return container.getElementsByTagName('object')[0].__viz;
+    }
+
+    // Wait until Tableau API has initialized
+    window.onload = function() {
+        var conferenceViz = getVizObject('vizConference');
+        var teamViz = getVizObject('vizTeam');
+        var playerViz = getVizObject('vizPlayer');
+
+        if (!conferenceViz || !teamViz || !playerViz) return;
+
+        // Conference → Team
+        conferenceViz.addEventListener(tableau.TableauEventName.FILTER_CHANGE, function(event) {
+            event.getFilterAsync().then(function(filter) {
+                var fieldName = filter.getFieldName();
+                var values = filter.getAppliedValues().map(v => v.value);
+                teamViz.getWorkbook().getActiveSheet().applyFilterAsync(fieldName, values, tableau.FilterUpdateType.REPLACE);
+            });
+        });
+
+        // Team → Player
+        teamViz.addEventListener(tableau.TableauEventName.FILTER_CHANGE, function(event) {
+            event.getFilterAsync().then(function(filter) {
+                var fieldName = filter.getFieldName();
+                var values = filter.getAppliedValues().map(v => v.value);
+                playerViz.getWorkbook().getActiveSheet().applyFilterAsync(fieldName, values, tableau.FilterUpdateType.REPLACE);
+            });
+        });
     };
-
-    // Initialize Tableau Viz objects
-    var conferenceViz = new tableau.Viz(document.getElementById('vizConference'),
-        "https://public.tableau.com/views/2025-2026NCAADivision1CollegeFootballRevenueSharingAllocationModel/ConferenceDashboard",
-        options);
-
-    var teamViz = new tableau.Viz(document.getElementById('vizTeam'),
-        "https://public.tableau.com/views/2025-2026NCAADivision1CollegeFootballRevenueSharingAllocationModel/TeamDashboard",
-        options);
-
-    var playerViz = new tableau.Viz(document.getElementById('vizPlayer'),
-        "https://public.tableau.com/views/2025-2026NCAADivision1CollegeFootballRevenueSharingAllocationModel/PlayerDashboard",
-        options);
-
-    // Conference → Team cascading filter
-    conferenceViz.addEventListener(tableau.TableauEventName.FILTER_CHANGE, function(event) {
-        event.getFilterAsync().then(function(filter) {
-            var fieldName = filter.getFieldName();
-            var values = filter.getAppliedValues().map(v => v.value);
-            teamViz.getWorkbook().getActiveSheet().applyFilterAsync(fieldName, values, tableau.FilterUpdateType.REPLACE);
-        });
-    });
-
-    // Team → Player cascading filter
-    teamViz.addEventListener(tableau.TableauEventName.FILTER_CHANGE, function(event) {
-        event.getFilterAsync().then(function(filter) {
-            var fieldName = filter.getFieldName();
-            var values = filter.getAppliedValues().map(v => v.value);
-            playerViz.getWorkbook().getActiveSheet().applyFilterAsync(fieldName, values, tableau.FilterUpdateType.REPLACE);
-        });
-    });
 </script>
+
 </div>
 
                 </div>
@@ -1556,6 +1538,7 @@
     </script>
 </body>
 </html>
+
 
 
 
