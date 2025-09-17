@@ -1075,15 +1075,17 @@
                 
                 <!-- Keep your existing project-item divs exactly as you have them -->
 <div class="project-grid">
+
+    <!-- Conference Dashboard -->
     <div class="project-item">
         <h3>Conference Dashboard</h3>
         <p>Interactive Tableau dashboard showing projected revenue allocations across conferences and illustrating settlement-driven funding flows.</p>
-
-        <!-- Your existing embedded Tableau Dashboard -->
         <div class='tableauPlaceholder' id='vizConference' style='position: relative; width: 100%; height: 800px;'>
             <noscript>
                 <a href='#'>
-                    <img alt='Conference Dashboard ' src='https://public.tableau.com/static/images/20/2025-2026NCAADivision1CollegeFootballRevenueSharingAllocationModel/ConferenceDashboard/1_rss.png' style='border: none;' />
+                    <img alt='Conference Dashboard' 
+                         src='https://public.tableau.com/static/images/20/2025-2026NCAADivision1CollegeFootballRevenueSharingAllocationModel/ConferenceDashboard/1_rss.png' 
+                         style='border: none;' />
                 </a>
             </noscript>
             <object class='tableauViz' style='display:none;'>
@@ -1102,48 +1104,132 @@
                 <param name='language' value='en-US'/>
             </object>
         </div>
+        <script type='text/javascript'>
+            var divElement = document.getElementById('vizConference');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            vizElement.style.width='100%';
+            vizElement.style.height='800px';
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
     </div>
 
-    <!-- Repeat your Team Dashboard and Player Dashboard divs exactly as before -->
-    <!-- ... -->
+    <!-- Team Dashboard -->
+    <div class="project-item">
+        <h3>Team Dashboard</h3>
+        <p>Interactive Tableau dashboard projecting revenue allocations across individual teams, illustrating how settlement-driven distributions impact program budgets and resource planning.</p>
+        <div class='tableauPlaceholder' id='vizTeam' style='position: relative; width: 100%; height: 820px;'>
+            <noscript>
+                <a href='#'>
+                    <img alt='Team Dashboard' 
+                         src='https://public.tableau.com/static/images/20/2025-2026NCAADivision1CollegeFootballRevenueSharingAllocationModel/TeamDashboard/1_rss.png' 
+                         style='border: none;' />
+                </a>
+            </noscript>
+            <object class='tableauViz' style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value=''/>
+                <param name='name' value='2025-2026NCAADivision1CollegeFootballRevenueSharingAllocationModel/TeamDashboard'/>
+                <param name='tabs' value='no'/>
+                <param name='toolbar' value='yes'/>
+                <param name='static_image' value='https://public.tableau.com/static/images/20/2025-2026NCAADivision1CollegeFootballRevenueSharingAllocationModel/TeamDashboard/1.png'/>
+                <param name='animate_transition' value='yes'/>
+                <param name='display_static_image' value='yes'/>
+                <param name='display_spinner' value='yes'/>
+                <param name='display_overlay' value='yes'/>
+                <param name='display_count' value='yes'/>
+                <param name='language' value='en-US'/>
+            </object>
+        </div>
+        <script type='text/javascript'>
+            var divElement = document.getElementById('vizTeam');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            vizElement.style.width='100%';
+            vizElement.style.height='820px';
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+    </div>
+
+    <!-- Player Dashboard -->
+    <div class="project-item">
+        <h3>Player Dashboard</h3>
+        <p>Interactive Tableau dashboard projecting revenue allocations at the player level, illustrating how settlement-driven distributions affect individual athletes and roster-level budgets.</p>
+        <div class='tableauPlaceholder' id='vizPlayer' style='position: relative; width: 100%; height: 820px;'>
+            <noscript>
+                <a href='#'>
+                    <img alt='Player Dashboard' 
+                         src='https://public.tableau.com/static/images/20/2025-2026NCAADivision1CollegeFootballRevenueSharingAllocationModel/PlayerDashboard/1_rss.png' 
+                         style='border: none;' />
+                </a>
+            </noscript>
+            <object class='tableauViz' style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value=''/>
+                <param name='name' value='2025-2026NCAADivision1CollegeFootballRevenueSharingAllocationModel/PlayerDashboard'/>
+                <param name='tabs' value='no'/>
+                <param name='toolbar' value='yes'/>
+                <param name='static_image' value='https://public.tableau.com/static/images/20/2025-2026NCAADivision1CollegeFootballRevenueSharingAllocationModel/PlayerDashboard/1.png'/>
+                <param name='animate_transition' value='yes'/>
+                <param name='display_static_image' value='yes'/>
+                <param name='display_spinner' value='yes'/>
+                <param name='display_overlay' value='yes'/>
+                <param name='display_count' value='yes'/>
+                <param name='language' value='en-US'/>
+            </object>
+        </div>
+        <script type='text/javascript'>
+            var divElement = document.getElementById('vizPlayer');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            vizElement.style.width='100%';
+            vizElement.style.height='820px';
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+    </div>
 
 </div>
 
-<!-- NEW: JS for cascading filters -->
-<script type="text/javascript" src="https://public.tableau.com/javascripts/api/viz_v1.js"></script>
+<!-- ADD JS for cascading filters BELOW all dashboard scripts -->
 <script type="text/javascript">
-    function getVizObject(id) {
-        var container = document.getElementById(id);
+    // Helper: get the Tableau Viz object
+    function getVizObject(containerId) {
+        var container = document.getElementById(containerId);
         return container.getElementsByTagName('object')[0].__viz;
     }
 
-    // Wait until Tableau API has initialized
-    window.onload = function() {
+    window.addEventListener('load', function() {
         var conferenceViz = getVizObject('vizConference');
         var teamViz = getVizObject('vizTeam');
         var playerViz = getVizObject('vizPlayer');
 
         if (!conferenceViz || !teamViz || !playerViz) return;
 
-        // Conference → Team
+        // Conference → Team filter cascade
         conferenceViz.addEventListener(tableau.TableauEventName.FILTER_CHANGE, function(event) {
             event.getFilterAsync().then(function(filter) {
-                var fieldName = filter.getFieldName();
+                var field = filter.getFieldName();
                 var values = filter.getAppliedValues().map(v => v.value);
-                teamViz.getWorkbook().getActiveSheet().applyFilterAsync(fieldName, values, tableau.FilterUpdateType.REPLACE);
+                teamViz.getWorkbook().getActiveSheet().applyFilterAsync(field, values, tableau.FilterUpdateType.REPLACE);
             });
         });
 
-        // Team → Player
+        // Team → Player filter cascade
         teamViz.addEventListener(tableau.TableauEventName.FILTER_CHANGE, function(event) {
             event.getFilterAsync().then(function(filter) {
-                var fieldName = filter.getFieldName();
+                var field = filter.getFieldName();
                 var values = filter.getAppliedValues().map(v => v.value);
-                playerViz.getWorkbook().getActiveSheet().applyFilterAsync(fieldName, values, tableau.FilterUpdateType.REPLACE);
+                playerViz.getWorkbook().getActiveSheet().applyFilterAsync(field, values, tableau.FilterUpdateType.REPLACE);
             });
         });
-    };
+    });
 </script>
+
 
 </div>
 
@@ -1538,6 +1624,7 @@
     </script>
 </body>
 </html>
+
 
 
 
