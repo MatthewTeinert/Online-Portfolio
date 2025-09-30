@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script>
     <style>
         :root {
             --primary-blue: #1F4E78;
@@ -386,88 +387,30 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Project Grid */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .project-item {
+        /* Tableau Container Styles */
+        .tableau-container {
             background: var(--white);
+            padding: 2rem;
             border-radius: var(--border-radius-lg);
-            padding: 2.5rem;
             box-shadow: var(--shadow-light);
-            transition: var(--transition);
-            border: 1px solid #f0f0f0;
-            position: relative;
-            overflow: hidden;
-            text-align: center;
+            margin-bottom: 3rem;
+            border: 1px solid #e9ecef;
         }
 
-        .project-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--success-green);
-        }
-
-        .project-item:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-heavy);
-            border-color: var(--success-green);
-        }
-
-        .project-item h3 {
-            color: var(--text-dark);
-            font-size: 1.4rem;
+        .tableau-container h3 {
+            color: var(--primary-blue);
             margin-bottom: 1rem;
-            line-height: 1.4;
+            font-size: 1.5rem;
         }
 
-        .project-item p {
+        .tableau-container p {
             color: var(--text-light);
-            margin-bottom: 2rem;
-            line-height: 1.6;
+            margin-bottom: 1.5rem;
         }
 
-        .project-button {
-            background: linear-gradient(135deg, var(--success-green), #2ecc71);
-            color: var(--white);
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: var(--transition);
-            font-family: inherit;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
+        .tableauPlaceholder {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: var(--transition);
-        }
-
-        .project-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4);
-        }
-
-        .project-button:hover::before {
-            left: 100%;
+            margin: 0 auto;
         }
 
         /* Activity Items */
@@ -876,8 +819,8 @@
                 padding: 1.5rem;
             }
             
-            .project-grid {
-                grid-template-columns: 1fr;
+            .tableau-container {
+                padding: 1rem;
             }
             
             .profile-photo {
@@ -921,7 +864,6 @@
 
         .nav button:focus,
         .pdf-button:focus,
-        .project-button:focus,
         .submit-button:focus,
         .cert-badge:focus {
             outline: 2px solid var(--accent-blue);
@@ -952,26 +894,6 @@
 
         <main class="content">
             <section id="about" class="section active">
-                <div class="card">
-                    <div style="display: flex; align-items: flex-start; gap: 3rem; margin-bottom: 2rem; flex-wrap: wrap;">
-                        <div style="flex-shrink: 0;">
-                            <div class="profile-photo">
-                                <img src="https://raw.githubusercontent.com/MatthewTeinert/Online-Portfolio/main/images/About%20-%20Profile%20Photo.jpg"  
-                                        alt="Matthew Teinert" 
-                                        style="width: 140%; height: 140%; object-fit: cover; border-radius: inherit; margin-top: 35px; margin-left: -10%;">
-                            </div>
-                        </div>
-                        <div style="flex: 1; min-width: 300px;">
-                            <h2 style="margin-top: 0;">About Me</h2>
-                            <p>Hey there, I'm Matthew! I'm currently a junior at the University of Texas at Austin studying Finance with a minor in the Analytics and Business of Sports. I'm originally from Round Rock, Texas, which gave me a great foundation growing up in the heart of Texas before making my way to Austin for college.</p>
-                            
-                            <p>I'm expected to graduate in May 2027 with my Bachelor of Business Administration from the McCombs School of Business. Currently, I maintain a 3.98 GPA and am part of the McCombs Success Scholars program.</p>
-                            
-                            <p>I'm passionate about the intersection of finance and sports, which is why I chose my unique minor. My goal is to break into investment banking or corporate finance, where I can combine my analytical skills with my love for problem-solving.</p>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="card">
                     <div style="display: flex; align-items: flex-start; gap: 3rem; margin-bottom: 2rem; flex-wrap: wrap;">
                         <div style="flex: 1; min-width: 300px;">
@@ -1059,7 +981,7 @@
                 </div>
             </section>
 
-           <section id="projects" class="section">
+            <section id="projects" class="section">
                 <div class="card">
                     <h2>Academic & Professional Projects</h2>
                     <p>A selection of projects that combine financial modeling and data analytics with applications in the sports industry, showcasing problem-solving skills in real-world contexts.</p>
@@ -1069,7 +991,7 @@
                     <h2>2025-2026 NCAA Division 1 College Football Revenue Sharing Allocation Model</h2>
                     <p>Comprehensive financial modeling project analyzing the new NCAA revenue sharing framework under the House v. NCAA Settlement and its impact on Division I football programs. Built interactive dashboards integrating roster and financial data to model allocations for 134 FBS teams and 14,000+ athletes, projecting team spending and illustrating funding flows across conferences, programs, and players.</p>
                     
-                    <div style="margin-top: 2rem;">
+                    <div style="margin-top: 2rem; text-align: left;">
                         <h3 style="color: var(--primary-blue); margin-bottom: 1rem;">Project Presentation</h3>
                         <div style="background: var(--white); padding: 2rem; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-light);">
                             <p style="margin-bottom: 1rem; color: var(--text-light);">Comprehensive slide deck detailing methodology, analysis, and findings.</p>
@@ -1093,10 +1015,10 @@
                     <h2>Interactive Tableau Dashboards</h2>
                     <p style="margin-bottom: 2rem;">Explore the three interactive dashboards below to analyze revenue sharing allocations at the conference, team, and player levels.</p>
                     
-                    <div style="margin-bottom: 4rem;">
-                        <h3 style="color: var(--primary-blue); margin-bottom: 1rem;">Conference Dashboard</h3>
-                        <p style="color: var(--text-light); margin-bottom: 1.5rem;">Interactive Tableau dashboard showing revenue allocation strategies across different athletic programs and compliance requirements.</p>
-                        <div class='tableauPlaceholder' id='viz1759268192924' style='position: relative; background: var(--white); padding: 1rem; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-light);'>
+                    <div class="tableau-container">
+                        <h3>Conference Dashboard</h3>
+                        <p>Interactive Tableau dashboard showing revenue allocation strategies across different athletic programs and compliance requirements.</p>
+                        <div class='tableauPlaceholder' id='viz1759268192924' style='position: relative;'>
                             <noscript><a href='#'><img alt='Conference Dashboard ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;20&#47;2025-2026NCAADivision1CollegeFootballRevenueSharingAllocationModel&#47;ConferenceDashboard&#47;1_rss.png' style='border: none' /></a></noscript>
                             <object class='tableauViz' style='display:none;'>
                                 <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
@@ -1116,10 +1038,10 @@
                         </div>
                     </div>
                     
-                    <div style="margin-bottom: 4rem;">
-                        <h3 style="color: var(--primary-blue); margin-bottom: 1rem;">Team Dashboard</h3>
-                        <p style="color: var(--text-light); margin-bottom: 1.5rem;">Detailed team-level analysis showing how individual programs allocate revenue sharing funds across their football rosters.</p>
-                        <div class='tableauPlaceholder' id='viz1759268225480' style='position: relative; background: var(--white); padding: 1rem; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-light);'>
+                    <div class="tableau-container">
+                        <h3>Team Dashboard</h3>
+                        <p>Detailed team-level analysis showing how individual programs allocate revenue sharing funds across their football rosters.</p>
+                        <div class='tableauPlaceholder' id='viz1759268225480' style='position: relative;'>
                             <noscript><a href='#'><img alt='Team Dashboard ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;20&#47;2025-2026NCAADivision1CollegeFootballRevenueSharingAllocationModel&#47;TeamDashboard&#47;1_rss.png' style='border: none' /></a></noscript>
                             <object class='tableauViz' style='display:none;'>
                                 <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
@@ -1139,10 +1061,10 @@
                         </div>
                     </div>
                     
-                    <div style="margin-bottom: 2rem;">
-                        <h3 style="color: var(--primary-blue); margin-bottom: 1rem;">Player Dashboard</h3>
-                        <p style="color: var(--text-light); margin-bottom: 1.5rem;">Player-level visualization tracking individual athlete compensation and distribution patterns across positions and roster composition.</p>
-                        <div class='tableauPlaceholder' id='viz1759268254373' style='position: relative; background: var(--white); padding: 1rem; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-light);'>
+                    <div class="tableau-container">
+                        <h3>Player Dashboard</h3>
+                        <p>Player-level visualization tracking individual athlete compensation and distribution patterns across positions and roster composition.</p>
+                        <div class='tableauPlaceholder' id='viz1759268254373' style='position: relative;'>
                             <noscript><a href='#'><img alt='Player Dashboard ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;20&#47;2025-2026NCAADivision1CollegeFootballRevenueSharingAllocationModel&#47;PlayerDashboard&#47;1_rss.png' style='border: none' /></a></noscript>
                             <object class='tableauViz' style='display:none;'>
                                 <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
@@ -1324,7 +1246,7 @@
 
     <script>
         // Enhanced PDF handling system
-        const PDF_BASE_URL = './pdfs/'; // Base URL for your PDF files
+        const PDF_BASE_URL = './pdfs/';
         
         function openPDF(category, filename, title) {
             const button = event.target;
@@ -1332,36 +1254,27 @@
             const iframe = document.getElementById('pdfIframe');
             const modalTitle = document.getElementById('pdfModalTitle');
             
-            // Show loading state
             button.classList.add('loading');
             const originalText = button.textContent;
             
-            // Set modal title
             modalTitle.textContent = title;
             
-            // Construct PDF path based on category
             const pdfPath = `${PDF_BASE_URL}${category}/${filename}`;
             
-            // For demonstration, we'll show a placeholder message
-            // In production, replace this with actual PDF loading
             setTimeout(() => {
                 button.classList.remove('loading');
                 
-                // Check if PDF exists (in production, you'd handle this properly)
                 if (checkPDFExists(pdfPath)) {
                     iframe.src = pdfPath;
                     modal.style.display = 'block';
                     document.body.style.overflow = 'hidden';
                 } else {
-                    // Fallback for demonstration
                     showPDFNotAvailable(title, category, filename);
                 }
             }, 1000);
         }
         
         function checkPDFExists(path) {
-            // In production, implement proper PDF existence checking
-            // For now, return false to show the placeholder system
             return false;
         }
         
@@ -1386,30 +1299,69 @@
             document.body.style.overflow = 'auto';
         }
         
-        // Enhanced section switching with performance optimization
+        // Enhanced section switching
         function showSection(sectionId) {
             const sections = document.querySelectorAll('.section');
             const navButtons = document.querySelectorAll('.nav-btn');
             const targetSection = document.getElementById(sectionId);
             const clickedButton = event ? event.target : document.querySelector(`[onclick*="'${sectionId}'"]`);
             
-            // Early return if section is already active
             if (targetSection.classList.contains('active')) return;
             
-            // Remove active states
             sections.forEach(section => section.classList.remove('active'));
             navButtons.forEach(btn => btn.classList.remove('active'));
             
-            // Add active states
             targetSection.classList.add('active');
             if (clickedButton) clickedButton.classList.add('active');
             
-            // Scroll to top smoothly
             window.scrollTo({ top: 0, behavior: 'smooth' });
             
-            // Update URL without page reload for better UX
             if (history.replaceState) {
                 history.replaceState(null, null, `#${sectionId}`);
+            }
+            
+            // Initialize Tableau when Projects section is viewed
+            if (sectionId === 'projects') {
+                setTimeout(initTableauViz, 100);
+            }
+        }
+
+        // Initialize Tableau visualizations
+        function initTableauViz() {
+            // Conference Dashboard
+            var divElement1 = document.getElementById('viz1759268192924');
+            if (divElement1 && !divElement1.classList.contains('tableau-initialized')) {
+                var vizElement1 = divElement1.getElementsByTagName('object')[0];
+                vizElement1.style.width = '100%';
+                vizElement1.style.height = '827px';
+                var scriptElement1 = document.createElement('script');
+                scriptElement1.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                vizElement1.parentNode.insertBefore(scriptElement1, vizElement1);
+                divElement1.classList.add('tableau-initialized');
+            }
+            
+            // Team Dashboard
+            var divElement2 = document.getElementById('viz1759268225480');
+            if (divElement2 && !divElement2.classList.contains('tableau-initialized')) {
+                var vizElement2 = divElement2.getElementsByTagName('object')[0];
+                vizElement2.style.width = '100%';
+                vizElement2.style.height = '827px';
+                var scriptElement2 = document.createElement('script');
+                scriptElement2.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                vizElement2.parentNode.insertBefore(scriptElement2, vizElement2);
+                divElement2.classList.add('tableau-initialized');
+            }
+            
+            // Player Dashboard
+            var divElement3 = document.getElementById('viz1759268254373');
+            if (divElement3 && !divElement3.classList.contains('tableau-initialized')) {
+                var vizElement3 = divElement3.getElementsByTagName('object')[0];
+                vizElement3.style.width = '100%';
+                vizElement3.style.height = '827px';
+                var scriptElement3 = document.createElement('script');
+                scriptElement3.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                vizElement3.parentNode.insertBefore(scriptElement3, vizElement3);
+                divElement3.classList.add('tableau-initialized');
             }
         }
 
@@ -1421,21 +1373,17 @@
             const formData = new FormData(form);
             const data = Object.fromEntries(formData);
             
-            // Show loading state
             const submitButton = form.querySelector('.submit-button');
             const originalText = submitButton.innerHTML;
             submitButton.innerHTML = 'Sending Message...';
             submitButton.disabled = true;
             
-            // Construct mailto URL
             const subject = encodeURIComponent(`Portfolio Contact: ${data.subject}`);
             const body = encodeURIComponent(`Name: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`);
             const mailtoURL = `mailto:matthew.teinert@yahoo.com?subject=${subject}&body=${body}`;
             
-            // Open default email client
             window.location.href = mailtoURL;
             
-            // Reset form after brief delay
             setTimeout(() => {
                 alert(`Thank you ${data.name}! Your default email client should have opened with a pre-filled message to matthew.teinert@yahoo.com. Please send the email to complete your message.`);
                 form.reset();
@@ -1446,16 +1394,13 @@
 
         // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
-            // Handle URL hash on page load
             const hash = window.location.hash.slice(1);
             if (hash && document.getElementById(hash)) {
                 showSection(hash);
-                // Update nav button
                 document.querySelector(`[onclick*="'${hash}'"]`)?.classList.add('active');
                 document.querySelector('.nav-btn.active:not([onclick*="' + hash + '"])')?.classList.remove('active');
             }
             
-            // Close PDF modal when clicking outside
             const modal = document.getElementById('pdfModal');
             modal.addEventListener('click', function(e) {
                 if (e.target === modal) {
@@ -1463,20 +1408,15 @@
                 }
             });
             
-            // Close PDF modal with Escape key
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
                     const modal = document.getElementById('pdfModal');
                     if (modal.style.display === 'block') {
                         closePDF();
-                    } else {
-                        // Return to about section
-                        showSection('about');
                     }
                 }
             });
             
-            // Intersection Observer for performance
             const observerOptions = {
                 root: null,
                 rootMargin: '50px',
@@ -1492,8 +1432,7 @@
                 });
             }, observerOptions);
 
-            // Observe cards for animations
-            const animatedElements = document.querySelectorAll('.card, .experience-card, .project-item, .activity-item');
+            const animatedElements = document.querySelectorAll('.card, .experience-card, .activity-item');
             animatedElements.forEach(el => {
                 el.style.opacity = '0';
                 el.style.transform = 'translateY(30px)';
@@ -1501,7 +1440,6 @@
                 observer.observe(el);
             });
 
-            // Add smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     if (this.getAttribute('href').startsWith('#') && this.getAttribute('href').length > 1) {
@@ -1514,7 +1452,6 @@
                 });
             });
 
-            // Performance: Lazy load gallery items
             const galleryItems = document.querySelectorAll('.gallery-item');
             galleryItems.forEach(item => {
                 item.addEventListener('mouseenter', function() {
@@ -1526,7 +1463,6 @@
                 });
             });
 
-            // Add focus management for accessibility
             const navButtons = document.querySelectorAll('.nav-btn');
             navButtons.forEach((button, index) => {
                 button.addEventListener('keydown', function(e) {
@@ -1543,7 +1479,6 @@
             });
         });
 
-        // Add preload for critical resources
         const preloadFont = document.createElement('link');
         preloadFont.rel = 'preload';
         preloadFont.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap';
@@ -1551,5 +1486,24 @@
         document.head.appendChild(preloadFont);
     </script>
 </body>
-</html>
+</html>-wrap: wrap;">
+                        <div style="flex-shrink: 0;">
+                            <div class="profile-photo">
+                                <img src="https://raw.githubusercontent.com/MatthewTeinert/Online-Portfolio/main/images/About%20-%20Profile%20Photo.jpg"  
+                                        alt="Matthew Teinert" 
+                                        style="width: 140%; height: 140%; object-fit: cover; border-radius: inherit; margin-top: 35px; margin-left: -10%;">
+                            </div>
+                        </div>
+                        <div style="flex: 1; min-width: 300px;">
+                            <h2 style="margin-top: 0;">About Me</h2>
+                            <p>Hey there, I'm Matthew! I'm currently a junior at the University of Texas at Austin studying Finance with a minor in the Analytics and Business of Sports. I'm originally from Round Rock, Texas, which gave me a great foundation growing up in the heart of Texas before making my way to Austin for college.</p>
+                            
+                            <p>I'm expected to graduate in May 2027 with my Bachelor of Business Administration from the McCombs School of Business. Currently, I maintain a 3.98 GPA and am part of the McCombs Success Scholars program.</p>
+                            
+                            <p>I'm passionate about the intersection of finance and sports, which is why I chose my unique minor. My goal is to break into investment banking or corporate finance, where I can combine my analytical skills with my love for problem-solving.</p>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="card">
+                    <div style="display: flex; align-items: flex-start; gap: 3rem; margin-bottom: 2rem; flex
