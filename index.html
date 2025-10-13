@@ -1338,32 +1338,90 @@
                     <h2>Photo Gallery</h2>
                 </div>
                 
-                <div class="gallery-grid">
-                    <div class="gallery-item" onclick="openPDF('golf-coming-soon', 'Golf Adventures')">
-                        <div class="gallery-placeholder"></div>
-                    </div>
-                    <div class="gallery-item" onclick="openPDF('longhorn-coming-soon', 'Texas Longhorns Spirit')">
-                        <div class="gallery-placeholder"></div>
-                    </div>
-                    <div class="gallery-item" onclick="openPDF('austin-coming-soon', 'Austin City Exploration')">
-                        <div class="gallery-placeholder"></div>
-                    </div>
-                    <div class="gallery-item" onclick="openPDF('travel-coming-soon', 'Travel Memories')">
-                        <div class="gallery-placeholder"></div>
-                    </div>
-                    <div class="gallery-item" onclick="openPDF('outdoor-coming-soon', 'Camping Experiences')">
-                        <div class="gallery-placeholder"></div>
-                    </div>
-                    <div class="gallery-item" onclick="openPDF('dachshund-coming-soon', 'Dachshund Moments')">
-                        <div class="gallery-placeholder"></div>
-                    </div>
-                    <div class="gallery-item" onclick="openPDF('nba-coming-soon', 'Basketball Games')">
-                        <div class="gallery-placeholder"></div>
-                    </div>
-                    <div class="gallery-item" onclick="openPDF('music-coming-soon', 'Music Events')">
-                        <div class="gallery-placeholder"></div>
+                <!-- Personal Life Section -->
+                <div class="card">
+                    <h3>Personal Life</h3>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <img src="Family.jpg" alt="Family" onclick="openModal(this)">
+                            <p class="gallery-caption">Family</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Friends.jpg" alt="Friends" onclick="openModal(this)">
+                            <p class="gallery-caption">Friends</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Relationship.jpg" alt="Relationship" onclick="openModal(this)">
+                            <p class="gallery-caption">Relationship</p>
+                        </div>
+                        <div class="gallery-item pets-container">
+                            <div class="pet-photo">
+                                <img src="Coco.jpg" alt="Coco" onclick="openModal(this)">
+                            </div>
+                            <div class="pet-photo">
+                                <img src="Ginger.jpg" alt="Ginger" onclick="openModal(this)">
+                            </div>
+                            <p class="gallery-caption">Pets</p>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Interests Section -->
+                <div class="card">
+                    <h3>Interests</h3>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <img src="Texas Football.jpg" alt="Texas Football" onclick="openModal(this)">
+                            <p class="gallery-caption">Texas Football</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Exploring Outdoors.jpg" alt="Exploring Outdoors" onclick="openModal(this)">
+                            <p class="gallery-caption">Exploring Outdoors</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- High School Section -->
+                <div class="card">
+                    <h3>High School</h3>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <img src="Sports.jpg" alt="Sports" onclick="openModal(this)">
+                            <p class="gallery-caption">Sports</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Graduation.jpg" alt="Graduation" onclick="openModal(this)">
+                            <p class="gallery-caption">Graduation</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- College Section -->
+                <div class="card">
+                    <h3>College</h3>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <img src="Internship.jpg" alt="Internship" onclick="openModal(this)">
+                            <p class="gallery-caption">Internship</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Mentorship - 2024.jpg" alt="Mentorship - 2024" onclick="openModal(this)">
+                            <p class="gallery-caption">Mentorship - 2024</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Mentorship - 2025.jpg" alt="Mentorship - 2025" onclick="openModal(this)">
+                            <p class="gallery-caption">Mentorship - 2025</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Image Modal -->
+            <div id="imageModal" class="modal" onclick="closeModal()">
+                <span class="modal-close">&times;</span>
+                <img class="modal-content" id="modalImage">
+                <div id="modalCaption"></div>
+            </div>
             </section>
         </main>
 
@@ -1672,6 +1730,7 @@ document
     </script>
 </body>
 </html>
+
 
 
 
